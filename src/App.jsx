@@ -1,22 +1,33 @@
-import Card from './components/Card';
+import PlaceContentCenter from './components/PlaceContentCenter';
 import Button from './components/Button';
+import { useState } from 'react';
 
 export default function App() {
+    const [count, setCount] = useState(0);
+
+    function hitung() {
+        setCount((prevState) => prevState + 1);
+    }
+
     return (
-        <div className='bg-slate-100 text-slate-800 tracking-tight grid place-content-center min-h-screen'>
-            <div className='max-w-md w-full'>
-                <Card>
-                    <Card.Title>Kenapa Reactjs?</Card.Title>
-                    <Card.Body>
-                        React sangat populer: React adalah salah satu framework JavaScript yang paling populer dan banyak digunakan di industri saat
-                        ini. Banyak perusahaan besar seperti Facebook, Instagram, dan Netflix menggunakan React untuk mengembangkan aplikasi web
-                        mereka. Dengan mempelajari React, Anda memperoleh keterampilan yang sangat dihargai di pasar kerja.
-                    </Card.Body>
-                    <Card.Footer>
-                        <Button>Lihat</Button>
-                    </Card.Footer>
-                </Card>
-            </div>
+        <div>
+            <PlaceContentCenter>
+                <div className='text-5xl font-bold'>{count}</div>
+                <div className='mt-4 flex items-center gap-x-2'>
+                    <Button className='bg-violet-600' onClick={hitung}>
+                        +1
+                    </Button>
+                    <Button
+                        className='bg-violet-600'
+                        onClick={() => {
+                            hitung();
+                            hitung();
+                            hitung();
+                        }}>
+                        +3
+                    </Button>
+                </div>
+            </PlaceContentCenter>
         </div>
     );
 }
