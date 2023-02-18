@@ -1,5 +1,3 @@
-import Button from './Button';
-
 function Card({ children }) {
     return <div className={'shadow rounded-lg overflow-hidden bg-white'}>{children}</div>;
 }
