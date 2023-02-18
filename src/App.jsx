@@ -1,58 +1,22 @@
-import {
-    IconBrandFacebook,
-    IconBrandTwitter,
-    IconBrandGithub,
-    IconBrandChrome,
-} from '@tabler/icons-react';
-import clsx from 'clsx';
-import React from 'react';
+import Card from './components/Card';
+import Button from './components/Button';
 
-export default function () {
-    const type = 'submit';
-    const onClick = () => console.log('on click dengan cara lain');
+export default function App() {
     return (
-        <div className={'bg-gray-200 grid place-content-center min-h-screen'}>
-            <div className={'flex gap-x-2'}>
-                <Button {...{ type, onClick }}>
-                    <IconBrandChrome />
-                    More
-                </Button>
-                <Button onClick={() => console.log('facebook')} type={'submit'}>
-                    <IconBrandFacebook />
-                    Facebook
-                </Button>
-                <Button
-                    className={'bg-sky-500'}
-                    onClick={() => console.log('twitter')}
-                    type={'reset'}
-                >
-                    <IconBrandTwitter />
-                    Twitter
-                </Button>
-                <Button
-                    className={'bg-gray-900'}
-                    onClick={() => console.log('twitter')}
-                    type={'reset'}
-                >
-                    <IconBrandGithub />
-                    Github
-                </Button>
+        <div className='bg-slate-100 text-slate-800 tracking-tight grid place-content-center min-h-screen'>
+            <div className='max-w-md w-full'>
+                <Card>
+                    <Card.Title>Kenapa Reactjs?</Card.Title>
+                    <Card.Body>
+                        React sangat populer: React adalah salah satu framework JavaScript yang paling populer dan banyak digunakan di industri saat
+                        ini. Banyak perusahaan besar seperti Facebook, Instagram, dan Netflix menggunakan React untuk mengembangkan aplikasi web
+                        mereka. Dengan mempelajari React, Anda memperoleh keterampilan yang sangat dihargai di pasar kerja.
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button>Lihat</Button>
+                    </Card.Footer>
+                </Card>
             </div>
         </div>
-    );
-}
-
-function Button(props) {
-    const { className = 'bg-blue-600', children, text } = props;
-    return (
-        <button
-            {...props}
-            className={clsx(
-                className,
-                '[&>svg]:w-5 [&>svg]:h-5 [&>svg]:stroke-1 flex items-center gap-x-2 text-white px-4 py-2 rounded'
-            )}
-        >
-            {text || children}
-        </button>
     );
 }
