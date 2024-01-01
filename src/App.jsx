@@ -1,47 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import PlaceContentCenter from './components/PlaceContentCenter';
 import Card from './components/Card';
-import axios from 'axios';
+import useJoke from './hooks/useJoke';
+import Input from './components/Input';
+import Button from './components/Button';
 
 export default function App(props) {
-    const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState([]);
-
-    useEffect(() => {
-        async function getUsers() {
-            setLoading(true);
-            try {
-                const { data } = await axios('https://jsonplaceholder.typicode.com/users');
-                setUser(data);
-                setLoading(false);
-            } catch (error) {
-                console.log(error);
-                setLoading(false);
-            }
-        }
-
-        getUsers().then((r) => r);
-    }, []);
-
+    const nameRef = useRef('');
+    const [name, setName] = useState('Fulan');
+    const joke = useJoke(name);
+    const generateJoke = (e) => {
+        e.preventDefault();
+        setName(nameRef.current.value);
+    };
     return (
         <PlaceContentCenter>
             <Card>
-                <Card.Title>Data Users : {user.length}</Card.Title>
+                <Card.Title>Joks</Card.Title>
                 <Card.Body>
-                    {loading ? (
-                        <div>Loading...</div>
-                    ) : user.length ? (
-                        <ol>
-                            {user.map((user) => (
-                                <li key={user.id}>
-                                    {user.name} ({user.username})
-                                </li>
-                            ))}
-                        </ol>
-                    ) : (
-                        <div>Belum ada data user...</div>
-                    )}
+                    <p className='mb-3'>{joke.value}</p>
+                    <Input ref={nameRef} />
                 </Card.Body>
+                <Card.Footer>
+                    <Button onClick={generateJoke}>Generate a joke</Button>
+                </Card.Footer>
             </Card>
         </PlaceContentCenter>
     );
